@@ -38,15 +38,29 @@
 **
 ****************************************************************************/
 
-#include <QApplication>
+#ifndef CALCULATORFORM_H
+#define CALCULATORFORM_H
 
-#include "form.h"
+//! [0]
+#include "ui_calculatorform.h"
+//! [0]
 
-int main(int argc, char *argv[])
+//! [1]
+class qtForm : public QWidget
 {
-    QApplication app(argc, argv);
-    qtForm calculator;
-    calculator.show();
-    return app.exec();
-}
+    Q_OBJECT
 
+public:
+    qtForm(QWidget *parent = 0);
+
+private slots:
+    void on_inputSpinBox1_valueChanged(int value);
+    void on_inputSpinBox2_valueChanged(int value);
+    void on_inputSpinBox3_valueChanged(double value);
+
+private:
+    Ui::Promille ui;
+};
+//! [1]
+
+#endif

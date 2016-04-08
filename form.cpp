@@ -38,15 +38,44 @@
 **
 ****************************************************************************/
 
-#include <QApplication>
-
 #include "form.h"
 
-int main(int argc, char *argv[])
+double absAlco(double, int);
+
+//! [0]
+qtForm::qtForm(QWidget *parent)
+    : QWidget(parent)
 {
-    QApplication app(argc, argv);
-    qtForm calculator;
-    calculator.show();
-    return app.exec();
+    ui.setupUi(this);
 }
+
+//! count absolute alcohol in blood
+double absAlco(double strong, int beers){
+    return (strong * beers) / 100;
+}
+
+//! [0]
+
+//! [1] weight
+void qtForm::on_inputSpinBox1_valueChanged(int value)
+{ }
+//! [1]
+
+//! [2] beers
+void qtForm::on_inputSpinBox2_valueChanged(int value)
+{
+    int aA = absAlco(value, ui.inputSpinBox3->value());
+    double promille = (aA * 0.8) / (ui.inputSpinBox1->value() * 0.70);
+    ui.outputWidget->setText(QString::number(promille));
+}
+//! [2]
+
+//! [3] strong
+void qtForm::on_inputSpinBox3_valueChanged(double value)
+{
+    int aA = absAlco(ui.inputSpinBox2->value(), value);
+    double promille = (aA * 0.8) / (ui.inputSpinBox1->value() * 0.70);
+    ui.outputWidget->setText(QString::number(promille));
+}
+//! [3]
 
