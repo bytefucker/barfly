@@ -58,13 +58,17 @@ double absAlco(double strong, int beers){
 
 //! [1] weight
 void qtForm::on_inputSpinBox1_valueChanged(int value)
-{ }
+{
+    int aA = absAlco(ui.inputSpinBox3->value(), ui.inputSpinBox3->value());
+    double promille = (aA * 0.8) / (value * 0.70);
+    ui.outputWidget->setText(QString::number(promille));
+}
 //! [1]
 
 //! [2] beers
 void qtForm::on_inputSpinBox2_valueChanged(int value)
 {
-    int aA = absAlco(value, ui.inputSpinBox3->value());
+    int aA = absAlco(ui.inputSpinBox3->value(), value);
     double promille = (aA * 0.8) / (ui.inputSpinBox1->value() * 0.70);
     ui.outputWidget->setText(QString::number(promille));
 }
@@ -73,7 +77,7 @@ void qtForm::on_inputSpinBox2_valueChanged(int value)
 //! [3] strong
 void qtForm::on_inputSpinBox3_valueChanged(double value)
 {
-    int aA = absAlco(ui.inputSpinBox2->value(), value);
+    int aA = absAlco(value, ui.inputSpinBox2->value());
     double promille = (aA * 0.8) / (ui.inputSpinBox1->value() * 0.70);
     ui.outputWidget->setText(QString::number(promille));
 }
